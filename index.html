@@ -1,21 +1,21 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:type" content="website">
 <meta property="og:title" content="👑 Happy Princess Day, Aaditi">
-<meta property="og:description" content="Today the whole kingdom belongs to you. Tap to begin your day.">
+<meta property="og:description" content="Today the whole kingdom belongs to you. So does its knight. Tap to begin your day.">
 <meta property="og:url" content="https://princess-aaditi.github.io/princess-day/">
 <meta property="og:image" content="https://princess-aaditi.github.io/princess-day/preview.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fde7ee">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Princess Day First Edition</title>
+<title>Princess Day for Aaditi</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Nunito:wght@500;700;800&display=swap">
 <style>
 /* Layout: one storybook page at a time on a soft pink card, a ribbon of progress above it */
 :root{
   --blush:#fde7ee; --petal:#fff8fa; --berry:#b8326a; --plum:#55203c; --rose:#f2a7c1;
-  --mint:#23775a; --on-berry:#ffffff;
+  --mint:#23775a; --on-berry:#ffffff; --night:#1d1438; --dusk:#3a2360; --glow:#ffd98a;
   --display:'Fraunces',Georgia,'Times New Roman',serif;
   --body:'Nunito','Trebuchet MS',Verdana,sans-serif;
 }
@@ -46,7 +46,7 @@ body{
 .where{font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--berry);min-height:20px;text-align:center;margin-bottom:8px}
 .page{
   background:var(--petal);border:2px solid var(--rose);border-radius:28px;
-  padding:26px 20px 24px;text-align:center;min-height:520px;
+  padding:26px 20px 24px;text-align:center;min-height:540px;
   display:flex;flex-direction:column;justify-content:center;
 }
 .step{display:none}
@@ -66,6 +66,7 @@ p{margin:0 0 12px}
 .next{margin-top:14px}
 button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
 .say{min-height:52px;font-weight:700;margin-top:8px}
+.count{font-weight:800;color:var(--berry)}
 
 /* choices */
 .picks{display:flex;flex-direction:column;gap:9px;margin:12px 0 4px}
@@ -76,20 +77,26 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
 .pick[aria-pressed="true"]{background:var(--berry);color:var(--on-berry);border-color:var(--berry)}
 .pick.used{opacity:.6;cursor:default}
 
-/* germ battle */
-.arena{position:relative;height:230px;border:2px dashed var(--rose);border-radius:20px;background:var(--blush);margin:10px 0 6px;overflow:hidden}
-.germ{
-  position:absolute;width:54px;height:54px;border-radius:50%;border:0;background:transparent;
+/* arenas */
+.arena{position:relative;height:240px;border:2px dashed var(--rose);border-radius:20px;background:var(--blush);margin:10px 0 6px;overflow:hidden}
+.germ,.kiss{
+  position:absolute;width:56px;height:56px;border-radius:50%;border:0;background:transparent;
   font-size:36px;line-height:1;padding:0;cursor:pointer;touch-action:manipulation;
-  animation:bob 2.2s ease-in-out infinite alternate;
 }
+.germ{animation:bob 2.2s ease-in-out infinite alternate}
 @keyframes bob{from{transform:translateY(-5px) rotate(-8deg)}to{transform:translateY(5px) rotate(8deg)}}
-.count{font-weight:800;color:var(--berry)}
+.kiss{top:-60px;animation:drop 4.2s linear forwards}
+.kiss.still{top:auto;animation:none}
+@keyframes drop{to{top:250px}}
 
-/* healing meter */
+/* meters */
 .meter{height:22px;border-radius:99px;background:var(--blush);border:2px solid var(--rose);overflow:hidden;margin:12px 0 4px}
 .meter i{display:block;height:100%;width:0;background:var(--mint);transition:width .4s}
 .pct{font-weight:800;color:var(--mint)}
+.guess{background:var(--blush);border-radius:20px;padding:14px;margin:8px 0}
+.guess label{display:block;font-weight:800;margin-bottom:6px}
+.guess input{width:100%;accent-color:var(--berry);height:34px}
+.lovenum{font-family:var(--display);font-weight:600;font-size:56px;line-height:1.1;color:var(--berry);font-variant-numeric:tabular-nums;min-height:64px}
 
 /* love notes */
 .notes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 4px}
@@ -98,7 +105,41 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
   font-size:34px;line-height:1;cursor:pointer;padding:0;
 }
 .note.open{background:var(--petal);border-style:dashed}
-.letter{min-height:92px;display:flex;align-items:center;justify-content:center;padding:6px 4px}
+.letter{min-height:96px;display:flex;align-items:center;justify-content:center;padding:6px 4px}
+
+/* hold the heart */
+#hold{
+  width:150px;height:150px;border-radius:50%;border:3px solid var(--rose);background:var(--blush);
+  font-size:74px;line-height:1;padding:0;cursor:pointer;margin:8px 0 4px;
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  transition:transform .3s;
+}
+#hold.down{border-color:var(--berry);animation:beat .8s ease-in-out infinite}
+@keyframes beat{0%,100%{box-shadow:0 0 0 0 var(--rose)}50%{box-shadow:0 0 0 14px transparent}}
+.held{list-style:none;margin:8px 0 0;padding:0;min-height:190px}
+.held li{font-family:var(--display);font-style:italic;font-size:19px;padding:4px 0}
+
+/* lanterns */
+.nightsky{
+  position:relative;height:250px;border-radius:20px;margin:10px 0 6px;overflow:hidden;
+  background:
+    radial-gradient(circle at 12% 18%, var(--glow) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 38% 40%, var(--glow) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 66% 12%, var(--glow) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 88% 44%, var(--glow) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 26% 84%, var(--glow) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 74% 86%, var(--glow) 0 1.5px, transparent 2px),
+    var(--night);
+  transition:background-color .8s;
+}
+.nightsky.aglow{background-color:var(--dusk)}
+.lantern{
+  position:absolute;width:54px;height:54px;border:0;border-radius:50%;background:transparent;
+  font-size:38px;line-height:1;padding:0;cursor:pointer;touch-action:manipulation;
+  filter:grayscale(1) brightness(.55);transition:filter .5s, transform .8s;
+}
+.lantern.lit{filter:drop-shadow(0 0 10px var(--glow));transform:translateY(-14px);cursor:default}
+.lantern:focus-visible{outline-color:var(--glow)}
 
 /* own order */
 .own{text-align:left;margin-top:8px}
@@ -114,14 +155,15 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
 .orders{text-align:left;background:var(--blush);border-radius:16px;padding:12px 14px;margin:12px 0}
 .orders ul{margin:6px 0 0;padding-left:20px}
 .orders li{overflow-wrap:anywhere}
-.getwell{border-top:2px dashed var(--rose);padding-top:12px;margin-top:12px}
-.sign{font-family:var(--display);font-style:italic;font-size:22px;color:var(--berry);margin-top:10px}
+.love{text-align:left;border-top:2px dashed var(--rose);padding-top:14px;margin-top:14px}
+.love p{font-family:var(--display);font-style:italic;font-size:19px;line-height:1.5}
+.sign{font-family:var(--display);font-style:italic;font-size:22px;color:var(--berry);margin-top:10px;text-align:center}
 .date{font-size:14px;font-weight:800;margin-top:6px}
 .fall{position:fixed;top:-40px;font-size:24px;pointer-events:none;animation:fall linear forwards;z-index:5}
 @keyframes fall{to{transform:translateY(110vh) rotate(340deg)}}
 @media (prefers-reduced-motion: reduce){
-  .germ{animation:none}
-  .ribbon i,.meter i{transition:none}
+  .germ,#hold.down{animation:none}
+  .ribbon i,.meter i,#hold,.lantern,.nightsky{transition:none}
   .fall{display:none}
 }
 </style>
@@ -134,8 +176,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
     <section class="step on" id="s0">
       <div class="big" aria-hidden="true">👑</div>
       <h1>Happy Princess Day, Aaditi</h1>
-      <p class="script">Today the whole kingdom belongs to you.</p>
-      <p>You’re unwell, so your knight Shree has planned a celebration you can enjoy from bed. No effort needed. Just tap.</p>
+      <p class="script">Today the whole kingdom belongs to you. So does its knight.</p>
+      <p>You’re unwell, and Shree can’t stand it. So he built you a celebration you can enjoy from bed. Nine little chapters, all for you. Just tap.</p>
       <button class="btn next" type="button" data-go="1">Begin my day</button>
     </section>
 
@@ -163,18 +205,57 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
       <div class="pct" id="pct" aria-live="polite">Recovery: 0%</div>
       <div class="picks" id="cures"></div>
       <div class="say" id="csay" aria-live="polite"></div>
-      <button class="btn next" type="button" id="n3" data-go="4" hidden>Open my letters</button>
+      <button class="btn next" type="button" id="n3" data-go="4" hidden>Now, some kisses</button>
     </section>
 
     <section class="step" id="s4">
+      <h2>Catch his kisses</h2>
+      <p>Shree is sending kisses from far away. Catch ten before they float past.</p>
+      <div class="arena" id="sky"></div>
+      <div class="count" id="kcount" aria-live="polite"></div>
+      <div class="say" id="ksay" aria-live="polite"></div>
+      <button class="btn next" type="button" id="n4" data-go="5" hidden>Keep them all</button>
+    </section>
+
+    <section class="step" id="s5">
+      <h2>How much does he love you?</h2>
+      <div class="guess">
+        <label for="guess">Take a guess, princess</label>
+        <input type="range" id="guess" min="0" max="100" step="1" value="60">
+        <div class="count" id="gout" aria-live="polite"></div>
+      </div>
+      <button class="btn" type="button" id="truth">Show me the truth</button>
+      <div class="lovenum" id="lovenum" aria-live="polite"></div>
+      <div class="say" id="lsay" aria-live="polite"></div>
+      <button class="btn next" type="button" id="n5" data-go="6" hidden>Open my letters</button>
+    </section>
+
+    <section class="step" id="s6">
       <h2>Letters for the princess</h2>
       <p>Six sealed notes from Shree. Open them all.</p>
       <div class="notes" id="notes"></div>
       <div class="letter script" id="letter" aria-live="polite">Tap an envelope.</div>
-      <button class="btn next" type="button" id="n4" data-go="5" hidden>Give my royal orders</button>
+      <button class="btn next" type="button" id="n6" data-go="7" hidden>One more thing</button>
     </section>
 
-    <section class="step" id="s5">
+    <section class="step" id="s7">
+      <h2>Hold my heart</h2>
+      <p>Press and hold the heart. Don’t let go until he has said everything.</p>
+      <button type="button" id="hold" aria-label="Press and hold the heart">🤍</button>
+      <ul class="held" id="held" aria-live="polite"></ul>
+      <button class="btn next" type="button" id="n7" data-go="8" hidden>Step outside with me</button>
+    </section>
+
+    <section class="step" id="s8">
+      <h2>Light the lanterns</h2>
+      <p>Shree made seven wishes for you tonight. Tap each lantern to light it and set his wish free.</p>
+      <div class="nightsky" id="nightsky"></div>
+      <div class="count" id="lcount" aria-live="polite"></div>
+      <div class="say" id="vsay" aria-live="polite"></div>
+      <button class="btn next" type="button" id="n8" data-go="9" hidden>Give my royal orders</button>
+    </section>
+
+    <section class="step" id="s9">
       <h2>Your royal orders</h2>
       <p>It’s your day. Choose what your knight must do. Pick as many as you like.</p>
       <div class="picks" id="orders"></div>
@@ -182,22 +263,28 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
         <label for="own">Or write your own order</label>
         <input type="text" id="own" maxlength="90" autocomplete="off" placeholder="My knight must…">
       </div>
-      <button class="btn next" type="button" data-go="6">Seal my orders</button>
+      <button class="btn next" type="button" data-go="10">Seal my orders</button>
     </section>
 
-    <section class="step" id="s6">
+    <section class="step" id="s10">
       <div class="scroll">
         <div class="big" aria-hidden="true">👑</div>
         <h1>Royal Proclamation</h1>
         <p>On this Princess Day, <strong>Aaditi</strong> is crowned</p>
         <p class="script" id="title"></p>
+        <p id="tally"></p>
         <div class="orders">
           <strong>By her command, Shree shall deliver:</strong>
           <ul id="owed"></ul>
         </div>
-        <p><strong>You are my beloved lady and my favourite person. Princess Day is one day. You’re my princess on all the others too.</strong></p>
-        <p class="getwell">Get well soon, my princess. Rest, drink water, and let me do the worrying. I’m waiting to see you back to your full sparkle.</p>
-        <div class="sign">Your knight, Shree</div>
+        <div class="love">
+          <p>Aaditi,</p>
+          <p>I don’t say this often enough, so I’m saying it plainly. You are the first person I want to tell everything to, and the one I want beside me when I have nothing to say at all.</p>
+          <p>Knowing you’re unwell makes me restless, because somewhere along the way your happiness became mine. So rest. Sleep as long as you need. Let me carry the worry.</p>
+          <p>Get well soon, my princess. I’m waiting for your laugh, your sparkle and your stubbornness, all of it. Princess Day lasts one day. You are my princess for all the rest of them.</p>
+          <p>I love you.</p>
+        </div>
+        <div class="sign">Your knight, always. Shree</div>
         <div class="date" id="date"></div>
       </div>
       <p>Screenshot this and send it to him, so he knows his orders.</p>
@@ -211,7 +298,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function(id){ return document.getElementById(id); };
-  var ROUNDS = 5;
+  var ROUNDS = 9;
 
   function show(n){
     var steps = document.querySelectorAll('.step');
@@ -219,8 +306,10 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
     $('where').textContent = (n >= 1 && n <= ROUNDS) ? 'Chapter ' + n + ' of ' + ROUNDS : '';
     $('bar').style.width = Math.min(n / (ROUNDS + 1), 1) * 100 + '%';
     window.scrollTo(0, 0);
+    stopKisses();
     if (n === 2) buildGerms();
-    if (n === 6) proclaim();
+    if (n === 4) startKisses();
+    if (n === 10) proclaim();
     var h = document.querySelector('#s' + n + ' h1, #s' + n + ' h2');
     if (h){ h.setAttribute('tabindex', '-1'); h.focus({preventScroll: true}); }
   }
@@ -261,7 +350,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
   }
 
   /* Chapter 2: germs */
-  var spots = [[8,10],[40,6],[72,12],[20,40],[56,38],[80,52],[6,68],[42,70]];
+  var spots = [[8,10],[40,6],[72,12],[20,40],[56,38],[78,52],[6,66],[42,68]];
   var cheers = [
     'One down! How dare it.',
     'Out of the kingdom, you.',
@@ -270,7 +359,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
     'Shree is not even tired.',
     'Almost clear, Your Highness.',
     'One left. It looks scared.',
-    'All gone. The kingdom is safe.'
+    'All gone. He would fight a thousand more for you.'
   ];
   var left = 0;
   function buildGerms(){
@@ -329,19 +418,87 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
     });
   }
 
-  /* Chapter 4: letters */
+  /* Chapter 4: kisses */
+  var KISSES = 10, caught = 0, kissTimer = null;
+  var kissLines = {
+    1: 'The first one always lands on your forehead.',
+    3: 'That one was for your nose.',
+    5: 'Halfway. He is not slowing down.',
+    8: 'Greedy princess. He approves.',
+    10: 'Ten caught. He has thousands more saved for you.'
+  };
+  function catchKiss(k){
+    if (k.disabled || caught >= KISSES) return;
+    k.disabled = true; k.textContent = '💗'; k.style.animationPlayState = 'paused';
+    caught++;
+    $('kcount').textContent = 'Kisses caught: ' + caught + ' of ' + KISSES;
+    if (kissLines[caught]) $('ksay').textContent = kissLines[caught];
+    setTimeout(function(){ k.remove(); }, 300);
+    if (caught >= KISSES){ stopKisses(); $('sky').textContent = ''; $('n4').hidden = false; }
+  }
+  function spawnKiss(i){
+    var k = button('kiss', '💋');
+    k.setAttribute('aria-label', 'A kiss');
+    if (reduce){
+      k.classList.add('still');
+      k.style.left = (4 + (i % 5) * 19) + '%'; k.style.top = (i < 5 ? 24 : 130) + 'px';
+    } else {
+      k.style.left = (4 + Math.random() * 74) + '%';
+      k.addEventListener('animationend', function(){ k.remove(); });
+    }
+    k.addEventListener('click', function(){ catchKiss(k); });
+    $('sky').appendChild(k);
+  }
+  function startKisses(){
+    stopKisses();
+    caught = 0; $('sky').textContent = ''; $('n4').hidden = true; $('ksay').textContent = '';
+    $('kcount').textContent = 'Kisses caught: 0 of ' + KISSES;
+    if (reduce){ for (var i = 0; i < KISSES; i++) spawnKiss(i); return; }
+    spawnKiss(0);
+    kissTimer = setInterval(function(){ spawnKiss(0); }, 800);
+  }
+  function stopKisses(){ if (kissTimer){ clearInterval(kissTimer); kissTimer = null; } }
+
+  /* Chapter 5: love meter */
+  var loveTimer = null;
+  function paintGuess(){ $('gout').textContent = 'Your guess: ' + $('guess').value + '%'; }
+  function resetLove(){
+    clearInterval(loveTimer);
+    $('guess').value = 60; $('guess').disabled = false; paintGuess();
+    $('truth').hidden = false; $('lovenum').textContent = ''; $('lsay').textContent = ''; $('n5').hidden = true;
+  }
+  function endLove(){
+    $('lovenum').textContent = '∞';
+    $('lsay').textContent = 'The meter broke. He loves you more than it can count.';
+    $('n5').hidden = false;
+  }
+  $('guess').addEventListener('input', paintGuess);
+  $('truth').addEventListener('click', function(){
+    $('truth').hidden = true; $('guess').disabled = true;
+    var v = parseInt($('guess').value, 10);
+    $('lsay').textContent = v >= 100 ? 'Bold guess. Still too low.' : 'Too low, princess. Watch.';
+    if (reduce){ endLove(); return; }
+    clearInterval(loveTimer);
+    loveTimer = setInterval(function(){
+      v += Math.max(7, Math.round(v * 0.12));
+      if (v >= 100000){ clearInterval(loveTimer); endLove(); return; }
+      $('lovenum').textContent = v.toLocaleString('en-IN') + '%';
+    }, 70);
+  });
+
+  /* Chapter 6: letters */
   var letters = [
-    'You make ordinary days feel like a celebration.',
-    'Your smile is my favourite thing to earn.',
+    'You are the calm in my loudest days.',
+    'I fell for your smile first. Then for everything behind it.',
     'Even sick and sleepy, you are the prettiest one in the kingdom.',
-    'I’m proud of you, more than I manage to say.',
+    'When something good happens, you are the first person I want to tell.',
     'The kingdom is dull without your laugh. Come back to it soon.',
-    'You are my beloved lady, today and every day.'
+    'You are my beloved lady, today and every day after.'
   ];
   var opened = 0;
   function buildNotes(){
     var box = $('notes'); box.textContent = ''; opened = 0;
-    $('letter').textContent = 'Tap an envelope.'; $('n4').hidden = true;
+    $('letter').textContent = 'Tap an envelope.'; $('n6').hidden = true;
     letters.forEach(function(text, i){
       var b = button('note', '💌');
       b.setAttribute('aria-label', 'Letter ' + (i + 1) + ' of ' + letters.length);
@@ -350,13 +507,93 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
         if (b.classList.contains('open')) return;
         b.classList.add('open'); b.textContent = '💗';
         opened++;
-        if (opened === letters.length) $('n4').hidden = false;
+        if (opened === letters.length) $('n6').hidden = false;
       });
       box.appendChild(b);
     });
   }
 
-  /* Chapter 5: orders */
+  /* Chapter 7: hold the heart */
+  var whispers = [
+    'This is me, holding your hand.',
+    'I wish I were sitting beside you right now.',
+    'I would bring your soup, fix your blanket and stay.',
+    'Being yours is the best thing about me.',
+    'I’m not letting go. Not today, not ever.'
+  ];
+  var said = 0, holdTimer = null, downAt = 0;
+  function whisper(){
+    if (said >= whispers.length) return;
+    var li = document.createElement('li'); li.textContent = whispers[said]; $('held').appendChild(li);
+    said++;
+    $('hold').style.transform = 'scale(' + (1 + said * 0.05) + ')';
+    if (said >= whispers.length){
+      clearInterval(holdTimer); holdTimer = null;
+      $('hold').textContent = '💗'; $('hold').classList.remove('down');
+      $('n7').hidden = false;
+    }
+  }
+  function resetHold(){
+    clearInterval(holdTimer); holdTimer = null; said = 0;
+    $('held').textContent = ''; $('hold').textContent = '🤍'; $('hold').classList.remove('down');
+    $('hold').style.transform = 'scale(1)'; $('n7').hidden = true;
+  }
+  function holdDown(e){
+    if (said >= whispers.length) return;
+    e.preventDefault();
+    downAt = Date.now(); $('hold').classList.add('down'); $('hold').textContent = '💓';
+    clearInterval(holdTimer);
+    holdTimer = setInterval(whisper, 1300);
+  }
+  function holdUp(){
+    if (!downAt) return;
+    var quick = Date.now() - downAt < 400; downAt = 0;
+    clearInterval(holdTimer); holdTimer = null;
+    $('hold').classList.remove('down');
+    if (said >= whispers.length) return;
+    if (quick) whisper();
+    if (said < whispers.length) $('hold').textContent = '🤍';
+  }
+  $('hold').addEventListener('pointerdown', holdDown);
+  $('hold').addEventListener('pointerup', holdUp);
+  $('hold').addEventListener('pointercancel', holdUp);
+  $('hold').addEventListener('pointerleave', holdUp);
+  $('hold').addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  $('hold').addEventListener('click', function(e){ if (e.detail === 0) whisper(); });
+
+  /* Chapter 8: lanterns */
+  var wishes = [
+    'I wish you a fever-free, pain-free tomorrow.',
+    'I wish you sleep so deep that you wake up smiling.',
+    'I wish every dream you are chasing finds its way to you.',
+    'I wish you never doubt how loved you are.',
+    'I wish you laughter, loud and often.',
+    'I wish to be the one beside you through all of it.',
+    'My last wish is the simplest. You, always.'
+  ];
+  var lanternSpots = [[4,56],[17,20],[31,60],[44,12],[56,54],[69,22],[80,60]];
+  var lit = 0;
+  function buildLanterns(){
+    var sky = $('nightsky'); sky.textContent = ''; sky.classList.remove('aglow'); lit = 0;
+    $('lcount').textContent = 'Lanterns lit: 0 of ' + wishes.length;
+    $('vsay').textContent = ''; $('n8').hidden = true;
+    lanternSpots.forEach(function(p, i){
+      var b = button('lantern', '🏮');
+      b.setAttribute('aria-label', 'Lantern ' + (i + 1) + ' of ' + wishes.length);
+      b.style.left = p[0] + '%'; b.style.top = p[1] + '%';
+      b.addEventListener('click', function(){
+        if (b.disabled) return;
+        b.disabled = true; b.classList.add('lit');
+        $('vsay').textContent = wishes[lit];
+        lit++;
+        $('lcount').textContent = 'Lanterns lit: ' + lit + ' of ' + wishes.length;
+        if (lit === wishes.length){ sky.classList.add('aglow'); $('n8').hidden = false; }
+      });
+      sky.appendChild(b);
+    });
+  }
+
+  /* Chapter 9: orders */
   var orders = [
     '📞 A long call tonight',
     '🍜 My favourite food, once I’m better',
@@ -383,6 +620,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
   function add(ul, text){ var li = document.createElement('li'); li.textContent = text; ul.appendChild(li); }
   function proclaim(){
     $('title').textContent = crowned || 'Princess of Soft Hearts';
+    $('tally').textContent = 'Germs defeated: ' + spots.length + '. Kisses caught: ' + caught + '. Lanterns lit: ' + lit + '.';
     var ul = $('owed'); ul.textContent = '';
     orders.forEach(function(text, i){ if (chosen[i]) add(ul, text); });
     var own = $('own').value.trim();
@@ -407,7 +645,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--berry);outline-
     }
   }
 
-  function reset(){ buildTiaras(); buildCures(); buildNotes(); buildOrders(); }
+  function reset(){ buildTiaras(); buildCures(); resetLove(); buildNotes(); resetHold(); buildLanterns(); buildOrders(); caught = 0; }
   $('again').addEventListener('click', function(){ reset(); show(0); });
   reset(); show(0);
 })();
